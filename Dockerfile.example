@@ -1,0 +1,15 @@
+FROM gcr.io/tensorflow/tensorflow:latest-devel
+RUN pip install slackclient
+RUN pip install websocket-client
+RUN pip install imgurpython
+RUN pip install google-cloud-storage
+RUN apt-get update
+RUN apt-get install -y libav-tools
+ENV SLACK_API_TOKEN <xoxo-SOME_API_TOKEN>
+ENV IMGUR_CLIENT_ID <SOME_CLIENT_ID>
+ENV IMGUR_CLIENT_SECRET <SOME_SECRET>
+ENV GOOGLE_APPLICATION_CREDENTIALS <PATH_TO_YOUR_APP_CREDENTIALS_JSON>
+ADD stealer stealer
+WORKDIR stealer
+
+CMD ["python", "imagebot.py"]

@@ -104,19 +104,19 @@ def on_message(ws, message):
         if 'imagebot retrain' in text:
             sc.api_call(
                     'chat.postMessage',
-                    channel='#-funsafe-house',
+                    channel=os.environ['CHANNEL_NAME'],
                     text='Sure thing, buddy; retraining myself on the accumulated examples.',
                     as_user=True)
             count = download_examples()
             sc.api_call(
                     'chat.postMessage',
-                    channel='#-funsafe-house',
+                    channel=os.environ['CHANNEL_NAME'],
                     text='I found a total of %d examples to train on.  Thiiiiis might take a bit.' % count,
                     as_user=True)
             retrain()
             sc.api_call(
                     'chat.postMessage',
-                    channel='#-funsafe-house',
+                    channel=os.environ['CHANNEL_NAME'],
                     text='Ooooookay, retraining done!',
                     as_user=True)
             upload_model()
@@ -125,14 +125,14 @@ def on_message(ws, message):
             if MOST_RECENT_URL is None:
                 sc.api_call(
                         'chat.postMessage',
-                        channel='#-funsafe-house',
+                        channel=os.environ['CHANNEL_NAME'],
                         text='I have not seen a URL recently, sorry!',
                         as_user=True)
                 return
             cls = text.split(' ')[-1]
             sc.api_call(
                     'chat.postMessage',
-                    channel='#-funsafe-house',
+                    channel=os.environ['CHANNEL_NAME'],
                     text='Okay sure!  I will mark the most recent URL as %s.' % cls,
                     as_user=True)
             fname = tempfile.mktemp(suffix='.mp4')
@@ -143,7 +143,7 @@ def on_message(ws, message):
 def spoopbot_url(text):
     sc.api_call(
             'chat.postMessage',
-            channel='#-funsafe-house',
+            channel=os.environ['CHANNEL_NAME'],
             text='I saw that spoopbot url, lemme check on it.',
             as_user=True)
 
@@ -165,7 +165,7 @@ def spoopbot_url(text):
         print imgur_url['link']
         sc.api_call(
                 'chat.postMessage',
-                channel='#-funsafe-house',
+                channel=os.environ['CHANNEL_NAME'],
                 text=imgur_url['link'] + '\n' + classes,
                 as_user=True)
     finally:

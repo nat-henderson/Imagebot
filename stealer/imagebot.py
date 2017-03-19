@@ -17,9 +17,9 @@ slack_token = os.environ['SLACK_API_TOKEN']
 sc = SlackClient(slack_token)
 imgur_client = ImgurClient(os.environ['IMGUR_CLIENT_ID'],
                            os.environ['IMGUR_CLIENT_SECRET'])
-PROJECT_NAME = 'spoopbot-156709'
+PROJECT_NAME = os.environ['PROJECT_NAME']
 storage_client = storage.Client(project=PROJECT_NAME)
-BUCKET_NAME = 'spoopbot-example-mp4s'
+BUCKET_NAME = os.environ['BUCKET_NAME']
 example_bucket = storage_client.get_bucket(BUCKET_NAME)
 LOCAL_EXAMPLES_DIR = '/examples/'
 MOST_RECENT_URL = None

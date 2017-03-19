@@ -158,7 +158,10 @@ def spoopbot_url(text):
         subprocess.check_call(['avconv', '-ss', '10', '-i', tmp_filename,
             '-frames', '1', '-f', 'image2', output_file])
         imgur_url = imgur_client.upload_from_path(output_file)
-        classes = is_stealer.what_class(output_file)
+        try:
+            classes = is_stealer.what_class(output_file)
+        except Exception:
+            classes = "Couldn't analyze image... uninitialized?"
         print imgur_url['link']
         sc.api_call(
                 'chat.postMessage',
